@@ -1,0 +1,588 @@
+:root {
+    --bg-main: #F2F2F2;      /* Fondo principal */
+    --bg-card: #EAE4D5;      /* Fondo de secciones o tarjetas */
+    --accent: #B6B09F;       /* Detalles, bordes, elementos secundarios */
+    --text-main: #000000;    /* Texto principal */
+    --text-soft: #333333;    /* Un negro un poco más suave para párrafos */
+    
+    --font-main: 'Inter', sans-serif;
+}
+
+/* --- ESTILOS GENERALES Y UTILIDADES --- */
+.container {
+    max-width: 900px; /* Ancho máximo para que no se desparrame en pantallas grandes */
+    margin: 0 auto;   /* Centrado horizontal */
+    padding: 0 20px;  /* Margen interno para que no toque los bordes del móvil */
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.bg-alt {
+    background-color: var(--bg-card); /* Color alternativo para diferenciar secciones */
+}
+
+h2.section-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block;
+}
+
+/* Pequeño detalle nórdico: subrayado sutil en los títulos */
+h2.section-title::after {
+    content: '';
+    display: block;
+    width: 50%;
+    height: 3px;
+    background-color: var(--accent);
+    margin-top: 5px;
+}
+
+/* --- NAV (BÁSICO) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    position: sticky; /* Se queda pegado arriba al hacer scroll */
+    top: 0;
+    background-color: var(--bg-main); /* Para que no sea transparente al bajar */
+    z-index: 1000;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+/* 1. El Botón Hamburguesa (Oculto en PC, Visible en Móvil) */
+.hamburger {
+    display: none; /* Por defecto no se ve */
+    cursor: pointer;
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+    background-color: var(--text-main);
+}
+@media (max-width: 768px) {
+    .hamburger {
+        display: block; /* Ahora sí mostramos el botón */
+        z-index: 2000; /* Aseguramos que esté por encima del menú desplegado */
+    }
+
+    /* El menú normal desaparece y se convierte en lateral */
+    .nav-links {
+        position: fixed;
+        right: -100%; /* Lo escondemos fuera de la pantalla a la derecha */
+        top: 0;
+        height: 100vh; /* Altura completa */
+        background-color: var(--bg-main); /* Fondo sólido */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 70%; /* Ocupa el 70% del ancho del móvil */
+        transition: right 0.4s ease-in-out; /* Animación suave al entrar */
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Sombrita para dar profundidad */
+        z-index: 1500;
+    }
+
+    .nav-links li {
+        margin: 20px 0; /* Más espacio entre enlaces para el dedo */
+    }
+
+    /* Clase que añadiremos con JS para mostrar el menú */
+    .nav-links.active {
+        right: 0; /* Lo traemos a la pantalla */
+    }
+
+    /* --- ANIMACIÓN DE LAS RAYITAS A "X" --- */
+    /* Cuando el botón tiene la clase 'active'... */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0; /* La del medio desaparece */
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg); /* La de arriba baja y gira */
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg); /* La de abajo sube y gira */
+    }
+}
+
+/* --- HERO --- */
+.hero {
+    min-height: 80vh; /* Ocupa casi toda la pantalla inicial */
+    display: flex;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.greeting {
+    color: var(--accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.description {
+    max-width: 500px;
+    margin: 20px 0;
+    color: var(--text-soft);
+}
+
+/* --- BOTONES --- */
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 2px; /* Bordes casi rectos (estilo minimalista) */
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: var(--text-main);
+    color: #fff;
+    border: 1px solid var(--text-main);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    color: var(--text-main);
+}
+
+.btn-outline {
+    border: 1px solid var(--text-main);
+    color: var(--text-main);
+    margin-left: 10px;
+}
+
+/* --- SOFT SKILLS --- */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.value-card {
+    text-align: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+}
+
+.icon-box {
+    margin-bottom: 20px;
+    color: var(--accent); /* Usamos tu color kaki para los iconos */
+    display: inline-block;
+    padding: 15px;
+    background-color: rgba(182, 176, 159, 0.1); /* Un fondo muy sutil del color accent */
+    border-radius: 50%; /* Círculo perfecto */
+}
+
+.value-card h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.value-card p {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+}
+
+/* --- SKILLS (Etiquetas/Chips) --- */
+.skills-category {
+    margin-bottom: 30px;
+}
+
+.skills-category h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: var(--text-soft);
+}
+
+.skills-grid {
+    display: flex;
+    flex-wrap: wrap; /* Esto hace que si no caben, bajen a la siguiente línea */
+    gap: 10px; /* Espacio entre etiquetas */
+}
+
+.skill-tag {
+    background-color: #fff; /* Fondo blanco para resaltar sobre el beige */
+    padding: 8px 16px;
+    border: 1px solid var(--accent);
+    font-size: 0.9rem;
+    cursor: default;
+    transition: transform 0.2s;
+}
+
+.skill-tag:hover {
+    transform: translateY(-3px); /* Pequeña animación al pasar el ratón */
+    border-color: var(--text-main);
+}
+
+/* --- AUTODIDACTA --- */
+.section-subtitle {
+    margin-top: -30px; /* Lo pegamos un poco al título */
+    margin-bottom: 40px;
+    color: var(--text-soft);
+}
+
+.learning-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.learning-item {
+    background-color: #fff;
+    border-left: 4px solid var(--accent); /* Una línea vertical elegante a la izquierda */
+    padding: 20px 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03); /* Sombra muy sutil */
+    border-radius: 0 4px 4px 0;
+}
+
+.learning-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.learning-header h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.learning-item p {
+    font-size: 0.9rem;
+    color: var(--text-soft);
+    margin: 0;
+}
+
+/* Badges (Etiquetas de estado) */
+.status-badge {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.learning {
+    background-color: #e3f2fd; /* Azul muy clarito */
+    color: #1565c0;
+}
+
+.status-badge.usage {
+    background-color: #e8f5e9; /* Verde muy clarito */
+    color: #2e7d32;
+}
+
+.status-badge.project {
+    background-color: #fff3e0; /* Naranja muy clarito */
+    color: #ef6c00;
+}
+/* --- TIMELINE (EXPERIENCIA) --- */
+.timeline {
+    border-left: 2px solid var(--accent); /* La línea vertical */
+    margin-left: 10px; /* Un poco de margen a la izquierda */
+    padding-left: 30px; /* Espacio entre la línea y el texto */
+}
+
+.timeline-item {
+    margin-bottom: 40px;
+    position: relative; /* Necesario para posicionar el punto */
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    background-color: var(--bg-main); /* Centro vacío (color de fondo) */
+    border: 3px solid var(--text-main); /* Borde fuerte */
+    border-radius: 50%;
+    position: absolute;
+    left: -39px; /* Ajustamos para que caiga justo sobre la línea */
+    top: 0;
+}
+
+.timeline-date {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timeline-content h3 {
+    font-size: 1.2rem;
+    color: var(--text-main);
+}
+
+.timeline-content h4 {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* --- CLASES PARA LA ANIMACIÓN (SCROLL REVEAL) --- */
+
+/* Estado inicial: Invisible y un poco desplazado hacia abajo */
+.hidden {
+    opacity: 0;
+    transform: translateY(30px); /* 30px más abajo de su posición original */
+    transition: all 1.2s ease-out;
+}
+
+/* Estado final: Visible y en su sitio */
+.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Pequeño truco: retrasar la aparición si hay varios elementos juntos */
+.timeline-item:nth-child(2) { transition-delay: 200ms; }
+.timeline-item:nth-child(3) { transition-delay: 400ms; }
+
+/* --- TELÓN DE INTRODUCCIÓN --- */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:var(var(--text-main));
+    z-index: 9999;
+    transition: transform 1s cubic-bezier(0.77, 0.175, 1);
+    transform-origin: top;
+}
+
+.intro-finish {
+    transform: translateY(-100%);
+}
+
+/* --- ANIMACIÓN DE TEXTOS (HERO) --- */
+/* Definimos el movimiento */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Clase base para los elementos */
+.fade-in-up {
+    opacity: 0; /* Empiezan invisibles */
+    animation: fadeInUp 0.8s ease-out forwards;
+    /* 'forwards' hace que se queden visibles al terminar */
+}
+
+/* Retrasos para el efecto cascada (Stagger) */
+/* Calculamos: Tiempo que tarda el telón (1s) + un poquito más */
+.delay-1 { animation-delay: 0.8s; }
+.delay-2 { animation-delay: 1.0s; }
+.delay-3 { animation-delay: 1.2s; }
+.delay-4 { animation-delay: 1.4s; }
+.delay-5 { animation-delay: 1.6s; }
+
+/* --- GRID DE PROYECTOS --- */
+.projects-grid {
+    display: grid;
+    /* ESTA LÍNEA ES MÁGICA: */
+    /* Crea columnas automáticamente. Mínimo 300px de ancho, si cabe más, estira. */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 30px; /* Espacio entre tarjetas */
+    margin-top: 20px;
+}
+
+/* --- TARJETA INDIVIDUAL --- */
+.project-card {
+    background-color: var(--bg-main); /* Fondo claro sobre la sección bg-alt */
+    border: 1px solid rgba(0,0,0,0.05); /* Borde muy sutil */
+    border-radius: 4px;
+    overflow: hidden; /* Para que la imagen no se salga de las esquinas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column; /* Para alinear el contenido verticalmente */
+}
+
+.project-card:hover {
+    transform: translateY(-5px); /* Se levanta un poco */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05); /* Sombra suave */
+    border-color: var(--accent);
+}
+
+/* --- IMAGEN DE LA TARJETA --- */
+.card-image {
+    height: 180px;
+    width: 100%;
+    overflow: hidden;
+}
+
+/* Placeholders mientras no tienes capturas */
+.placeholder-img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Opción 1: Degradado suave para webs */
+.web-gradient {
+    background: linear-gradient(135deg, #EAE4D5 0%, #B6B09F 100%);
+}
+
+/* Opción 2: Patrón oscuro para backend/código */
+.code-pattern {
+    background-color: #2c2c2c;
+    background-image: radial-gradient(#4a4a4a 1px, transparent 1px);
+    background-size: 10px 10px;
+}
+
+/* --- CONTENIDO DE LA TARJETA --- */
+.card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Ocupa todo el espacio disponible */
+}
+
+.card-content h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--text-main);
+}
+
+.card-content p {
+    font-size: 0.95rem;
+    color: var(--text-soft);
+    margin-bottom: 20px;
+    flex-grow: 1; /* Empuja los botones hacia abajo para que queden alineados */
+}
+
+/* --- ETIQUETAS DE TECNOLOGÍA --- */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.card-tags span {
+    font-size: 0.75rem;
+    background-color: var(--bg-card);
+    padding: 4px 10px;
+    border-radius: 20px; /* Redonditos */
+    color: var(--text-soft);
+    font-weight: 600;
+}
+
+/* --- ENLACES (GITHUB / DEMO) --- */
+.card-links {
+    display: flex;
+    gap: 20px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    padding-top: 15px;
+}
+
+.link-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.link-item:hover {
+    color: var(--accent);
+}
+
+/* --- SECCIÓN CONTACTO --- */
+.contact-container {
+    text-align: center; /* Centramos el texto y el botón */
+    max-width: 600px;   /* Limitamos el ancho para que el texto no sea una línea eterna en PC */
+    margin: 0 auto;     /* Aseguramos el centrado del bloque */
+}
+
+.contact-container p {
+    color: var(--text-soft);
+    margin-bottom: 35px;
+    font-size: 1.1rem;
+}
+
+/* Botón ligeramente más grande para esta sección */
+.btn-large {
+    padding: 15px 45px;
+    font-size: 1.1rem;
+}
+
+/* --- REDES SOCIALES --- */
+.social-links {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Separación entre iconos */
+}
+
+.social-links a {
+    color: var(--text-main);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--accent); /* Se ponen del color kaki al pasar el ratón */
+    transform: translateY(-5px); /* Pequeño saltito animado */
+}
+
+/* --- FOOTER --- */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: var(--bg-card); /* Usamos el color de fondo alternativo para cerrar */
+    color: var(--text-soft);
+    font-size: 0.9rem;
+}
+/* --- IMÁGENES REALES --- */
+.img-cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Recorta la imagen para que llene el hueco sin deformarse */
+    display: block;
+}
