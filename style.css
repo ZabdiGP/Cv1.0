@@ -217,7 +217,43 @@ h2.section-title::after {
     color: var(--text-soft);
     line-height: 1.7;
 }
+/* --- AJUSTE DE BOTONES EN MÓVIL (LADO A LADO) --- */
 
+/* 1. Definimos el contenedor de botones como Flexbox */
+.hero-btns {
+    display: flex;
+    justify-content: center; /* O 'flex-start' si tu diseño está alineado a la izquierda */
+    gap: 15px; /* Espacio entre botones en escritorio */
+    flex-wrap: wrap; /* En escritorio permitimos que bajen si es necesario, pero... */
+}
+
+/* 2. Reglas específicas para pantallas pequeñas (Móviles) */
+@media (max-width: 480px) {
+    .hero-btns {
+        flex-wrap: nowrap; /* IMPORTANTE: Prohibimos que bajen a la siguiente línea */
+        gap: 10px; /* Reducimos el espacio entre ellos */
+        width: 100%; /* Que ocupen todo el ancho disponible */
+        padding: 0 10px; /* Un poco de aire a los lados de la pantalla */
+    }
+
+    .hero-btns .btn {
+        /* Reducimos el relleno interno (antes era 30px a los lados) */
+        padding: 12px 10px; 
+        
+        /* Texto un pelín más pequeño */
+        font-size: 0.85rem; 
+        
+        /* Truco: flex: 1 hace que ambos botones se repartan el espacio al 50% */
+        flex: 1; 
+        
+        /* Aseguramos que el texto esté centrado y no se rompa */
+        text-align: center;
+        white-space: nowrap; 
+        
+        /* Ajuste visual */
+        min-width: 0; /* Evita desbordamientos en flexbox */
+    }
+}
 /* --- SKILLS (Etiquetas/Chips) --- */
 .skills-category {
     margin-bottom: 30px;

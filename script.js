@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
     // Pequeño timeout para que el usuario vea el color negro un instante
     setTimeout(() => {
         overlay.classList.add('intro-finish');
-    }, 500); // Espera medio segundo antes de subir el telón
+    }, 750); // Espera medio segundo antes de subir el telón
 });
 
 // Esperamos a que todo el HTML cargue antes de ejecutar
