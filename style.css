@@ -1,18 +1,32 @@
 :root {
-    --bg-main: #F2F2F2;      /* Fondo principal */
-    --bg-card: #EAE4D5;      /* Fondo de secciones o tarjetas */
-    --accent: #B6B09F;       /* Detalles, bordes, elementos secundarios */
+    --bg-main: #e2e0e1;      /* Fondo principal */
+    --bg-card: #ebe1dc;      /* Fondo de secciones o tarjetas */
+    --accent: #c0a190;       /* Detalles, bordes, elementos secundarios */
     --text-main: #000000;    /* Texto principal */
-    --text-soft: #333333;    /* Un negro un poco más suave para párrafos */
+    --text-soft: #10303e;    /* Párrafos */
     
     --font-main: 'Inter', sans-serif;
 }
+/* :root {
+    --bg-main: #F2F2F2;      
+    --bg-card: #EAE4D5;      
+    --accent: #B6B09F;       
+    --text-main: #000000;    
+    --text-soft: #333333;    
+    
+    --font-main: 'Inter', sans-serif;
+} */
 
 /* --- ESTILOS GENERALES Y UTILIDADES --- */
+
+html{
+    scroll-behavior: smooth;
+}
+
 .container {
-    max-width: 900px; /* Ancho máximo para que no se desparrame en pantallas grandes */
-    margin: 0 auto;   /* Centrado horizontal */
-    padding: 0 20px;  /* Margen interno para que no toque los bordes del móvil */
+    max-width: 900px; 
+    margin: 0 auto;   
+    padding: 0 20px;  
 }
 
 .section-padding {
@@ -30,7 +44,7 @@ h2.section-title {
     display: inline-block;
 }
 
-/* Pequeño detalle nórdico: subrayado sutil en los títulos */
+/*Subrayado sutil en los títulos */
 h2.section-title::after {
     content: '';
     display: block;
@@ -41,14 +55,27 @@ h2.section-title::after {
 }
 
 /* --- NAV (BÁSICO) --- */
+
+.logo{
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.logo:hover{
+    color: var(--accent);
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    position: sticky; /* Se queda pegado arriba al hacer scroll */
+    position: sticky;
     top: 0;
-    background-color: var(--bg-main); /* Para que no sea transparente al bajar */
+    background-color: var(--bg-main); 
     z-index: 1000;
 }
 
@@ -64,11 +91,15 @@ h2.section-title::after {
     font-weight: 600;
     font-size: 0.9rem;
 }
+
+
 /* 1. El Botón Hamburguesa (Oculto en PC, Visible en Móvil) */
 .hamburger {
     display: none; /* Por defecto no se ve */
     cursor: pointer;
 }
+
+
 
 .bar {
     display: block;
@@ -87,17 +118,17 @@ h2.section-title::after {
     /* El menú normal desaparece y se convierte en lateral */
     .nav-links {
         position: fixed;
-        right: -100%; /* Lo escondemos fuera de la pantalla a la derecha */
+        right: -100%; 
         top: 0;
-        height: 100vh; /* Altura completa */
-        background-color: var(--bg-main); /* Fondo sólido */
+        height: 100vh; 
+        background-color: var(--bg-main); 
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        width: 70%; /* Ocupa el 70% del ancho del móvil */
-        transition: right 0.4s ease-in-out; /* Animación suave al entrar */
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1); /* Sombrita para dar profundidad */
+        width: 70%; 
+        transition: right 0.4s ease-in-out; 
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1); 
         z-index: 1500;
     }
 
@@ -113,15 +144,15 @@ h2.section-title::after {
     /* --- ANIMACIÓN DE LAS RAYITAS A "X" --- */
     /* Cuando el botón tiene la clase 'active'... */
     .hamburger.active .bar:nth-child(2) {
-        opacity: 0; /* La del medio desaparece */
+        opacity: 0; 
     }
 
     .hamburger.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg); /* La de arriba baja y gira */
+        transform: translateY(8px) rotate(45deg);
     }
 
     .hamburger.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg); /* La de abajo sube y gira */
+        transform: translateY(-8px) rotate(-45deg);
     }
 }
 
@@ -177,6 +208,11 @@ h2.section-title::after {
     border: 1px solid var(--text-main);
     color: var(--text-main);
     margin-left: 10px;
+}
+
+.btn-outline:hover{
+    background-color: var(--text-main);
+    color: #fff;
 }
 
 /* --- SOFT SKILLS --- */
@@ -272,7 +308,7 @@ h2.section-title::after {
 }
 
 .skill-tag {
-    background-color: #fff; /* Fondo blanco para resaltar sobre el beige */
+    background-color: #fff; 
     padding: 8px 16px;
     border: 1px solid var(--accent);
     font-size: 0.9rem;
@@ -594,7 +630,7 @@ h2.section-title::after {
     margin-top: 50px;
     display: flex;
     justify-content: center;
-    gap: 30px; /* Separación entre iconos */
+    gap: 30px; 
 }
 
 .social-links a {
@@ -603,15 +639,15 @@ h2.section-title::after {
 }
 
 .social-links a:hover {
-    color: var(--accent); /* Se ponen del color kaki al pasar el ratón */
-    transform: translateY(-5px); /* Pequeño saltito animado */
+    color: var(--accent); 
+    transform: translateY(-5px);
 }
 
 /* --- FOOTER --- */
 .footer {
     text-align: center;
     padding: 30px 20px;
-    background-color: var(--bg-card); /* Usamos el color de fondo alternativo para cerrar */
+    background-color: var(--bg-main);
     color: var(--text-soft);
     font-size: 0.9rem;
 }
